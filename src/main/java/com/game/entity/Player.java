@@ -1,23 +1,33 @@
 package com.game.entity;
 
+
+import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Date;
 
-
+@Entity
+@Table(schema = "rpg", name = "player")
+@NamedQuery(name = "player_AllCount", query = "select count(p) from Player p") ////select count(p) from Player p
 public class Player {
+    @Id
+    @GeneratedValue
     private Long id;
-
+    @Column(name="name", nullable=false, length = 12)
     private String name;
-
+    @Column(name="title", nullable=false, length = 30)
     private String title;
-
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name="race", nullable=false)
     private Race race;
-
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name="profession", nullable=false)
     private Profession profession;
-
+    @Column(name="birthday", nullable=false)
     private Date birthday;
-
+    @Column(name="banned", nullable=false)
     private Boolean banned;
-
+    @Column(name="level", nullable=false)
     private Integer level;
 
     public Player() {
